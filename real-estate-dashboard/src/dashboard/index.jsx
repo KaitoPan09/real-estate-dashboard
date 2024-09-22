@@ -22,7 +22,7 @@ import { properties } from "./data";
 import { Badge } from "@/components/ui/badge";
 import { Plus } from "lucide-react";
 
-const appText = new Map([
+const occupancyText = new Map([
   ["all", "All Properties"],
   ["occupied", "Occupied"],
   ["available", "Available"],
@@ -81,7 +81,7 @@ export default function Dashboard() {
             />
             <Select value={propertyType} onValueChange={setPropertyType}>
               <SelectTrigger className="w-36">
-                <SelectValue>{appText.get(propertyType)}</SelectValue>
+                <SelectValue>{occupancyText.get(propertyType)}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Properties</SelectItem>
@@ -115,32 +115,32 @@ export default function Dashboard() {
         </div>
         <Separator className="shadow" />
         <ul className="faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProperties.map((app) => (
+          {filteredProperties.map((property) => (
             <li
-              key={app.name}
+              key={property.name}
               className="rounded-lg border p-4 hover:shadow-md"
             >
               <div className="mb-8 flex items-center justify-between">
                 <div
                   className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
                 >
-                  {/* {app.logo} */}
+                  {/* {property.logo} */}
                 </div>
                 <Button
                   variant="outline"
                   size="sm"
                   className={`${
-                    app.occupancy === "Occupied"
+                    property.occupancy === "Occupied"
                       ? "border border-red-300 bg-red-50 hover:bg-red-100 dark:border-red-700 dark:bg-red-950 dark:hover:bg-red-900"
                       : "border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900"
                   }`}
                 >
-                  {app.occupancy === "Occupied" ? "Occupied" : "Available"}
+                  {property.occupancy === "Occupied" ? "Occupied" : "Available"}
                 </Button>
               </div>
               <div>
-                <h2 className="mb-1 font-semibold">{app.name}</h2>
-                <p className="line-clamp-2 text-gray-500">{app.location}</p>
+                <h2 className="mb-1 font-semibold">{property.name}</h2>
+                <p className="line-clamp-2 text-gray-500">{property.location}</p>
               </div>
               <div className="mt-4 flex items-center justify-between">
                 <div>
@@ -149,7 +149,7 @@ export default function Dashboard() {
                     size="lg"
                     className="font-black border border-green-300 bg-green-50 hover:bg-green-100 dark:border-green-700 dark:bg-green-950 dark:hover:bg-green-900"
                   >
-                    $ {app.price}
+                    $ {property.price}
                   </Button>
                 </div>
                 <Button variant="outline" size="lg">
