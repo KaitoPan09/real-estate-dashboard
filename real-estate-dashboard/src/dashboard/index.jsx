@@ -6,32 +6,36 @@ import {
 } from "@tabler/icons-react";
 import { Layout } from "@/components/custom/layout";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 // import { Search } from "@/components/search";
 import ModeSwitch from "@/components/mode-switch";
 import { UserNav } from "@/components/user-nav";
 import { Button } from "@/components/ui/button";
 import { properties } from "./data";
-import { Badge } from "@/components/ui/badge";
 import { Plus } from "lucide-react";
+import AvailabilityFilter from "./components/availability-filter";
+import LocationFilter from "./components/location-filter";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import PriceFilter from "./components/price-filter";
 
-const occupancyText = new Map([
-  ["all", "All Properties"],
-  ["occupied", "Occupied"],
-  ["available", "Available"],
-]);
+const getLocationValue = (location) => {
+  const parts = location.split(",").map((part) => part.trim());
+  return parts.slice(-2).join(", ");
+};
 
 export default function Dashboard() {
   const [sort, setSort] = useState("ascending");
   const [propertyType, setPropertyType] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   const filteredProperties = properties
     .sort((a, b) =>
@@ -46,16 +50,26 @@ export default function Dashboard() {
         ? properties.occupancy === "Available"
         : true
     )
+    .filter((property) =>
+      selectedLocations.length === 0
+        ? true
+        : selectedLocations.includes(getLocationValue(property.location))
+    )
     .filter((properties) =>
-      properties.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+      properties.name.toLowerCase().includes(searchName.toLowerCase())
+    )
+    .filter((property) => {
+      const price = property.price;
+      const min = minPrice ? parseFloat(minPrice) : 0;
+      const max = maxPrice ? parseFloat(maxPrice) : Infinity;
+      return price >= min && price <= max;
+    });
 
   return (
     <Layout fixed>
       {/* ===== Top Heading ===== */}
       <Layout.Header>
         <div className="ml-auto flex items-center space-x-4">
-          {/* <Search /> */}
           <div className="flex items-center space-x-4">
             <ModeSwitch />
             <UserNav />
@@ -76,19 +90,23 @@ export default function Dashboard() {
             <Input
               placeholder="Filter properties..."
               className="h-9 w-40 lg:w-[250px]"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchName}
+              onChange={(e) => setSearchName(e.target.value)}
             />
-            <Select value={propertyType} onValueChange={setPropertyType}>
-              <SelectTrigger className="w-36">
-                <SelectValue>{occupancyText.get(propertyType)}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Properties</SelectItem>
-                <SelectItem value="occupied">Occupied</SelectItem>
-                <SelectItem value="available">Available</SelectItem>
-              </SelectContent>
-            </Select>
+
+            {/* Availability */}
+            <AvailabilityFilter
+              propertyType={propertyType}
+              setPropertyType={setPropertyType}
+            />
+            {/* Locations */}
+            <LocationFilter
+              properties={properties}
+              selectedLocations={selectedLocations}
+              setSelectedLocations={setSelectedLocations}
+            />
+            <PriceFilter minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice}/>
+            
           </div>
 
           <Select value={sort} onValueChange={setSort}>
@@ -140,7 +158,9 @@ export default function Dashboard() {
               </div>
               <div>
                 <h2 className="mb-1 font-semibold">{property.name}</h2>
-                <p className="line-clamp-2 text-gray-500">{property.location}</p>
+                <p className="line-clamp-2 text-gray-500">
+                  {property.location}
+                </p>
               </div>
               <div className="mt-4 flex items-center justify-between">
                 <div>
