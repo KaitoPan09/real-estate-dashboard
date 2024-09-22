@@ -9,21 +9,20 @@
 //   </StrictMode>,
 // )
 
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 // import App from './App.jsx'
-import './index.css'
-import { ThemeProvider } from './components/theme-provider.jsx';
-import Dashboard from './dashboard/index.jsx';
-import { BrowserRouter } from 'react-router-dom';
+import "./index.css";
+import { ThemeProvider } from "./components/theme-provider.jsx";
+import Dashboard from "./dashboard/index.jsx";
+import router from "@/router";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
-        <Dashboard />
-      </ThemeProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
     {/* <App /> */}
-    </BrowserRouter>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

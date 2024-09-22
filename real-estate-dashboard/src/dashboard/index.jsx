@@ -19,6 +19,8 @@ import ModeSwitch from "@/components/mode-switch";
 import { UserNav } from "@/components/user-nav";
 import { Button } from "@/components/ui/button";
 import { properties } from "./data";
+import { Badge } from "@/components/ui/badge";
+import { Plus } from "lucide-react";
 
 const appText = new Map([
   ["all", "All Properties"],
@@ -39,15 +41,17 @@ export default function Dashboard() {
     )
     .filter((properties) =>
       propertyType === "occupied"
-        ? properties.occupancy
+        ? properties.occupancy === "Occupied"
         : propertyType === "available"
-        ? !properties.occupancy
+        ? properties.occupancy === "Available"
         : true
     )
-    .filter((properties) => properties.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    .filter((properties) =>
+      properties.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   return (
-    <Layout className="h-screen flex flex-col">
+    <Layout fixed>
       {/* ===== Top Heading ===== */}
       <Layout.Header>
         <div className="ml-auto flex items-center space-x-4">
@@ -65,9 +69,7 @@ export default function Dashboard() {
           <h1 className="text-2xl font-bold tracking-tight">
             Property Listing in XYZ County
           </h1>
-          <p className="text-muted-foreground">
-            Properties for Sale in XYZ
-          </p>
+          <p className="text-muted-foreground">Properties for Sale in XYZ</p>
         </div>
         <div className="my-4 flex items-end justify-between sm:my-0 sm:items-center">
           <div className="flex flex-col gap-4 sm:my-4 sm:flex-row">
@@ -112,7 +114,7 @@ export default function Dashboard() {
           </Select>
         </div>
         <Separator className="shadow" />
-        <ul className="faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProperties.map((app) => (
             <li
               key={app.name}
@@ -128,18 +130,31 @@ export default function Dashboard() {
                   variant="outline"
                   size="sm"
                   className={`${
-                    app.occupancy
-                      ? "border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900"
-                      : ""
+                    app.occupancy === "Occupied"
+                      ? "border border-red-300 bg-red-50 hover:bg-red-100 dark:border-red-700 dark:bg-red-950 dark:hover:bg-red-900"
+                      : "border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900"
                   }`}
                 >
-                  {app.occupancy ? "Occupied" : "Available"}
+                  {app.occupancy === "Occupied" ? "Occupied" : "Available"}
                 </Button>
               </div>
               <div>
                 <h2 className="mb-1 font-semibold">{app.name}</h2>
-                <h4 className="mb-1 font-semibold">{app.location}</h4>
-                <p className="line-clamp-2 text-gray-500">{app.description}</p>
+                <p className="line-clamp-2 text-gray-500">{app.location}</p>
+              </div>
+              <div className="mt-4 flex items-center justify-between">
+                <div>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="font-black border border-green-300 bg-green-50 hover:bg-green-100 dark:border-green-700 dark:bg-green-950 dark:hover:bg-green-900"
+                  >
+                    $ {app.price}
+                  </Button>
+                </div>
+                <Button variant="outline" size="lg">
+                  <Plus /> View Property
+                </Button>
               </div>
             </li>
           ))}
