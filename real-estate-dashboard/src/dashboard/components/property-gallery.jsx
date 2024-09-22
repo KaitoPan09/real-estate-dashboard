@@ -8,6 +8,8 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { PiImageBroken } from "react-icons/pi";
 
+// PropertyGallery component for passing the carousel props
+// Passes props to Property Details 
 const PropertyGallery = ({ images }) => {
   return images?.length > 0 ? (
     <Carousel

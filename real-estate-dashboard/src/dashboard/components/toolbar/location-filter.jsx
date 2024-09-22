@@ -22,6 +22,7 @@ const getLocationValue = (location) => {
   return parts.slice(-2).join(", ");
 };
 
+// Passes Location filter props to Toolbar component 
 const LocationFilter = ({
   properties,
   selectedLocations,
@@ -80,6 +81,7 @@ const LocationFilter = ({
                     onSelect={() => toggleLocation(location)}
                     className="flex items-center"
                   >
+                    {/* Customized Checkbox renders for filtering */}
                     <div
                       className={cn(
                         "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",

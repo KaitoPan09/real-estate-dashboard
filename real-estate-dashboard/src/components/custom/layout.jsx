@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 
 const LayoutContext = React.createContext(null);
 
+// Layout component to manage a scrollable layout structure
 const Layout = ({ className, fixed = false, ...props }) => {
   const divRef = React.useRef(null);
   const [offset, setOffset] = React.useState(0);
@@ -13,12 +14,12 @@ const Layout = ({ className, fixed = false, ...props }) => {
     if (!div) return;
     const onScroll = () => setOffset(div.scrollTop);
 
-    // clean up code
     div.removeEventListener('scroll', onScroll);
     div.addEventListener('scroll', onScroll, { passive: true });
     return () => div.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Provide the layout context with the current scroll offset and fixed prop
   return (
     <LayoutContext.Provider value={{ offset, fixed }}>
       <div
@@ -36,6 +37,8 @@ const Layout = ({ className, fixed = false, ...props }) => {
 };
 Layout.displayName = 'Layout';
 
+
+// Header component that can be used inside the Layout
 const Header = React.forwardRef(
   ({ className, sticky, ...props }, ref) => {
     // Check if Layout.Header is used within Layout
@@ -64,6 +67,7 @@ const Header = React.forwardRef(
 );
 Header.displayName = 'Header';
 
+// Body component that can be used inside the Layout
 const Body = React.forwardRef(
   ({ className, ...props }, ref) => {
     // Check if Layout.Body is used within Layout
@@ -91,4 +95,5 @@ Body.displayName = 'Body';
 Layout.Header = Header;
 Layout.Body = Body;
 
+// Export the Layout component with its subcomponents
 export { Layout };

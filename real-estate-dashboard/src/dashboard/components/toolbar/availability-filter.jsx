@@ -12,6 +12,7 @@ const availabilityText = new Map([
   ["available", "Available"],
 ]);
 
+// Passes Availability filter props to Toolbar component 
 const AvailabilityFilter = ({ propertyType, setPropertyType }) => {
   return (
     <Select value={propertyType} onValueChange={setPropertyType}>

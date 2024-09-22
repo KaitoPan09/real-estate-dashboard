@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import PropertyDetails from "./property-details";
 
+// PropertyList component for passing props of generalize list view
+// Passes props to Dashboard index
 const PropertyList = ({ properties }) => {
   return (
     <ul className="faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -46,6 +48,7 @@ const PropertyList = ({ properties }) => {
                 $ {property.price}
               </Button>
             </div>
+            {/* PropertyDetails Component */}
             <PropertyDetails property={property} />
           </div>
         </li>

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
+// Passes Price filter props to Toolbar component 
 const PriceFilter = ({ minPrice, setMinPrice, maxPrice, setMaxPrice }) => {
   const handleClear = () => {
     setMinPrice("");

@@ -7,6 +7,7 @@ const initialState = {
 
 const ThemeProviderContext = createContext(initialState);
 
+// ThemeProvider component to manage the application's theme
 export function ThemeProvider({
   children,
   defaultTheme = "system",
@@ -17,6 +18,7 @@ export function ThemeProvider({
     () => localStorage.getItem(storageKey) || defaultTheme
   );
 
+  // Effect to apply the theme to the document's root element
   useEffect(() => {
     const root = window.document.documentElement;
 
@@ -49,6 +51,7 @@ export function ThemeProvider({
   );
 }
 
+// Custom hook to access the Theme context
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 

@@ -7,6 +7,8 @@ import { properties } from "./data";
 import Toolbar from "./components/toolbar/toolbar";
 import PropertyList from "./components/property-lists";
 
+// Function to format of the location filter
+// Splits and keeps the last 2 commas from the JSON (city, state)
 const getLocationValue = (location) => {
   const parts = location.split(",").map((part) => part.trim());
   return parts.slice(-2).join(", ");
@@ -21,11 +23,13 @@ export default function Dashboard() {
   const [maxPrice, setMaxPrice] = useState("");
 
   const filteredProperties = properties
+    // Sort the properties based on propert name
     .sort((a, b) =>
       sort === "ascending"
         ? a.name.localeCompare(b.name)
         : b.name.localeCompare(a.name)
     )
+    // Filter by occupancy status
     .filter((properties) =>
       propertyType === "occupied"
         ? properties.occupancy === "Occupied"
@@ -33,18 +37,21 @@ export default function Dashboard() {
         ? properties.occupancy === "Available"
         : true
     )
+    // Filter based on property location
     .filter((property) =>
-      selectedLocations.length === 0
+      selectedLocations.length === 0 // If no location is selected, show all properties
         ? true
-        : selectedLocations.includes(getLocationValue(property.location))
+        : selectedLocations.includes(getLocationValue(property.location)) // Match selected locations
     )
+    // Filter by name search (case-insensitive)
     .filter((properties) =>
       properties.name.toLowerCase().includes(searchName.toLowerCase())
     )
+    // Filter based on price
     .filter((property) => {
       const price = property.price;
-      const min = minPrice ? parseFloat(minPrice) : 0;
-      const max = maxPrice ? parseFloat(maxPrice) : Infinity;
+      const min = minPrice ? parseFloat(minPrice) : 0; // default is set to 0
+      const max = maxPrice ? parseFloat(maxPrice) : Infinity; // default is set to infinity
       return price >= min && price <= max;
     });
 
@@ -88,7 +95,7 @@ export default function Dashboard() {
 
         <Separator className="shadow" />
 
-        {/* Property List */}
+        {/* Property List Component */}
         <PropertyList properties={filteredProperties} />
       </Layout.Body>
     </Layout>

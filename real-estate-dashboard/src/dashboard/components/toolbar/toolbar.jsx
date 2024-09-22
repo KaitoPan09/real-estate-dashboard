@@ -4,6 +4,8 @@ import LocationFilter from "./location-filter";
 import PriceFilter from "./price-filter";
 import SortingProperty from "./sorting";
 
+// Passing toolbar props for filtering and sorting
+// Passes props to Dashboard index
 const Toolbar = ({
   searchName,
   setSearchName,

@@ -11,6 +11,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
+// Passes Sorting props to Toolbar component 
 const SortingProperty = ({ sort, setSort }) => {
   return (
     <Select value={sort} onValueChange={setSort}>

@@ -17,6 +17,8 @@ import { GiHomeGarage } from "react-icons/gi";
 import { GiSofa } from "react-icons/gi";
 import PropertyGallery from "./property-gallery";
 
+// PropertyDetails component for passing details props
+// Passes props to Property Listing
 const PropertyDetails = ({ property }) => {
   return (
     <Drawer>
@@ -33,9 +35,13 @@ const PropertyDetails = ({ property }) => {
           <div>{property.location}</div>
           <DrawerDescription>{property.description}</DrawerDescription>
           <div className="flex items-center text-2xl">$ {property.price}</div>
+
+          {/* Property Gallery Component */}
           <div className="flex items-center justify-center">
             <PropertyGallery images={property.images} />
           </div>
+
+          {/* Props specific details to be rendered to dashboard */}
           <div className="flex items-center justify-center mt-4">
             <div className="flex items-center md:text-xl sm:text-xs mx-1 lg:mx-5">
               <FaBed className="mx-1" />
