@@ -1,22 +1,10 @@
 import { useState } from "react";
-import {
-  IconAdjustmentsHorizontal,
-  IconSortAscendingLetters,
-  IconSortDescendingLetters,
-} from "@tabler/icons-react";
 import { Layout } from "@/components/custom/layout";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-// import { Search } from "@/components/search";
 import ModeSwitch from "@/components/mode-switch";
 import { UserNav } from "@/components/user-nav";
-import { Button } from "@/components/ui/button";
 import { properties } from "./data";
-import { Plus } from "lucide-react";
-import AvailabilityFilter from "./components/availability-filter";
-import LocationFilter from "./components/location-filter";
-import PriceFilter from "./components/price-filter";
-import SortingProperty from "./components/sorting";
+import Toolbar from "./components/toolbar/toolbar";
 import PropertyList from "./components/property-lists";
 
 const getLocationValue = (location) => {
@@ -80,85 +68,28 @@ export default function Dashboard() {
           </h1>
           <p className="text-muted-foreground">Properties for Sale in XYZ</p>
         </div>
-        <div className="my-4 flex items-end justify-between sm:my-0 sm:items-center">
-          <div className="flex flex-col gap-4 sm:my-4 sm:flex-row">
 
-            {/* Name Filter */}
-            <Input
-              placeholder="Filter properties..."
-              className="h-9 w-40 lg:w-[250px]"
-              value={searchName}
-              onChange={(e) => setSearchName(e.target.value)}
-            />
+        {/* Toolbar Component */}
+        <Toolbar
+          searchName={searchName}
+          setSearchName={setSearchName}
+          propertyType={propertyType}
+          setPropertyType={setPropertyType}
+          selectedLocations={selectedLocations}
+          setSelectedLocations={setSelectedLocations}
+          minPrice={minPrice}
+          setMinPrice={setMinPrice}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+          sort={sort}
+          setSort={setSort}
+          properties={properties}
+        />
 
-            {/* Availability Filter */}
-            <AvailabilityFilter
-              propertyType={propertyType}
-              setPropertyType={setPropertyType}
-            />
-            {/* Locations Filter */}
-            <LocationFilter
-              properties={properties}
-              selectedLocations={selectedLocations}
-              setSelectedLocations={setSelectedLocations}
-            />
-
-            {/* Price Filter */}
-            <PriceFilter minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice}/>
-            
-          </div>
-
-          {/* Sorting */}
-          <SortingProperty sort={sort} setSort={setSort} />
-        </div>
         <Separator className="shadow" />
+
+        {/* Property List */}
         <PropertyList properties={filteredProperties} />
-        {/* <ul className="faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProperties.map((property) => (
-            <li
-              key={property.name}
-              className="rounded-lg border p-4 hover:shadow-md"
-            >
-              <div className="mb-8 flex items-center justify-between">
-                <div
-                  className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
-                >
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className={`${
-                    property.occupancy === "Occupied"
-                      ? "border border-red-300 bg-red-50 hover:bg-red-100 dark:border-red-700 dark:bg-red-950 dark:hover:bg-red-900"
-                      : "border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900"
-                  }`}
-                >
-                  {property.occupancy === "Occupied" ? "Occupied" : "Available"}
-                </Button>
-              </div>
-              <div>
-                <h2 className="mb-1 font-semibold">{property.name}</h2>
-                <p className="line-clamp-2 text-gray-500">
-                  {property.location}
-                </p>
-              </div>
-              <div className="mt-4 flex items-center justify-between">
-                <div>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="font-black border border-green-300 bg-green-50 hover:bg-green-100 dark:border-green-700 dark:bg-green-950 dark:hover:bg-green-900"
-                  >
-                    $ {property.price}
-                  </Button>
-                </div>
-                <Button variant="outline" size="lg">
-                  <Plus /> View Property
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ul> */}
       </Layout.Body>
     </Layout>
   );
