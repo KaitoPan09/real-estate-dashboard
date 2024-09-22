@@ -15,14 +15,9 @@ import { properties } from "./data";
 import { Plus } from "lucide-react";
 import AvailabilityFilter from "./components/availability-filter";
 import LocationFilter from "./components/location-filter";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import PriceFilter from "./components/price-filter";
+import SortingProperty from "./components/sorting";
+import PropertyList from "./components/property-lists";
 
 const getLocationValue = (location) => {
   const parts = location.split(",").map((part) => part.trim());
@@ -66,9 +61,9 @@ export default function Dashboard() {
     });
 
   return (
-    <Layout fixed>
+    <Layout>
       {/* ===== Top Heading ===== */}
-      <Layout.Header>
+      <Layout.Header sticky>
         <div className="ml-auto flex items-center space-x-4">
           <div className="flex items-center space-x-4">
             <ModeSwitch />
@@ -87,6 +82,8 @@ export default function Dashboard() {
         </div>
         <div className="my-4 flex items-end justify-between sm:my-0 sm:items-center">
           <div className="flex flex-col gap-4 sm:my-4 sm:flex-row">
+
+            {/* Name Filter */}
             <Input
               placeholder="Filter properties..."
               className="h-9 w-40 lg:w-[250px]"
@@ -94,45 +91,29 @@ export default function Dashboard() {
               onChange={(e) => setSearchName(e.target.value)}
             />
 
-            {/* Availability */}
+            {/* Availability Filter */}
             <AvailabilityFilter
               propertyType={propertyType}
               setPropertyType={setPropertyType}
             />
-            {/* Locations */}
+            {/* Locations Filter */}
             <LocationFilter
               properties={properties}
               selectedLocations={selectedLocations}
               setSelectedLocations={setSelectedLocations}
             />
+
+            {/* Price Filter */}
             <PriceFilter minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice}/>
             
           </div>
 
-          <Select value={sort} onValueChange={setSort}>
-            <SelectTrigger className="w-16">
-              <SelectValue>
-                <IconAdjustmentsHorizontal size={18} />
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent align="end">
-              <SelectItem value="ascending">
-                <div className="flex items-center gap-4">
-                  <IconSortAscendingLetters size={16} />
-                  <span>Ascending</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="descending">
-                <div className="flex items-center gap-4">
-                  <IconSortDescendingLetters size={16} />
-                  <span>Descending</span>
-                </div>
-              </SelectItem>
-            </SelectContent>
-          </Select>
+          {/* Sorting */}
+          <SortingProperty sort={sort} setSort={setSort} />
         </div>
         <Separator className="shadow" />
-        <ul className="faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 sm:grid-cols-2 lg:grid-cols-3">
+        <PropertyList properties={filteredProperties} />
+        {/* <ul className="faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProperties.map((property) => (
             <li
               key={property.name}
@@ -142,7 +123,6 @@ export default function Dashboard() {
                 <div
                   className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
                 >
-                  {/* {property.logo} */}
                 </div>
                 <Button
                   variant="outline"
@@ -178,7 +158,7 @@ export default function Dashboard() {
               </div>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </Layout.Body>
     </Layout>
   );

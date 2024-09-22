@@ -6,7 +6,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-const occupancyText = new Map([
+const availabilityText = new Map([
   ["all", "All Properties"],
   ["occupied", "Occupied"],
   ["available", "Available"],
@@ -16,7 +16,7 @@ const AvailabilityFilter = ({ propertyType, setPropertyType }) => {
   return (
     <Select value={propertyType} onValueChange={setPropertyType}>
       <SelectTrigger className="w-36">
-        <SelectValue>{occupancyText.get(propertyType)}</SelectValue>
+        <SelectValue>{availabilityText.get(propertyType)}</SelectValue>
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="all">All Properties</SelectItem>

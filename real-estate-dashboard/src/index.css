@@ -75,9 +75,14 @@
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    overflow-y: auto; /* Ensure overflow is set to allow scrolling */
-    height: 420px;
+    height: auto;
   }
+
+  @media (min-width: 640px) { /* Adjust the width as needed for your breakpoint */
+    .no-scrollbar {
+        height: 420px; /* Height limit for desktop */
+    }
+}
 
   .faded-bottom {
     @apply after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full after:bg-[linear-gradient(180deg,_transparent_10%,_hsl(var(--background))_70%)] after:md:block;
