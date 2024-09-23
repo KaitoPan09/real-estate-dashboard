@@ -49,7 +49,7 @@ const LocationFilter = ({
   return (
     <Popover>
       <PopoverTrigger>
-        <Button variant="outline" size="sm" className="h-10 border-dashed">
+        <Button variant="outline" size="sm" className="h-10 border-dashed flex">
           <HomeIcon className="mr-2 h-4 w-4" />
           Property
         </Button>
