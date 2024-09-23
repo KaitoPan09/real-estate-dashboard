@@ -20,3 +20,11 @@ Start the server
 ```bash
   npm run dev
 ```
+
+## Author
+
+Submitted by [Christopher Jon Gaw Put](https://github.com/KaitoPan09)
+
+## Submission Date
+
+September 2024

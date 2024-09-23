@@ -71,7 +71,7 @@ export default function Dashboard() {
       <Layout.Body className="flex flex-col">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
-            Property Listing in XYZ County
+            Property Listing in XYZ Country
           </h1>
           <p className="text-muted-foreground">Properties for Sale in XYZ</p>
         </div>
