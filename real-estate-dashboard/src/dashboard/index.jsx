@@ -6,7 +6,7 @@ import { UserNav } from "@/components/user-nav";
 import { properties } from "./data";
 import Toolbar from "./components/toolbar/toolbar";
 import PropertyList from "./components/property-lists";
-import { getLocationValue, filteredProperties } from "@/lib/utils";
+import { getLocationValue, filterProps } from "@/lib/utils";
 
 export default function Dashboard() {
   const [sortRating, setSortRating] = useState("descending");
@@ -15,14 +15,14 @@ export default function Dashboard() {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const props = filteredProperties({
+  const filteredProperties = filterProps({
     properties,
     sortRating,
     propertyType,
     selectedLocations,
+    searchName,
     minPrice,
     maxPrice,
-    searchName,
   });
 
   return (

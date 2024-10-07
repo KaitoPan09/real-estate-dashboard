@@ -13,7 +13,7 @@ export const getLocationValue = (location) => {
   return parts.slice(1).join(", ");
 };
 
-export const filteredProperties = ({
+export const filterProps = ({
   properties,
   sortRating,
   propertyType,
