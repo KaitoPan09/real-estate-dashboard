@@ -9,7 +9,7 @@ const PropertyList = ({ properties }) => {
       {properties.map((property) => (
         <li
           key={property.name}
-          className="rounded-lg border p-4 hover:shadow-md"
+          className="rounded-lg border p-4 hover:shadow-md max-h-[217.6px]"
         >
           <div className="mb-8 flex items-center justify-between">
             <div

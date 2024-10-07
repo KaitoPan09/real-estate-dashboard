@@ -53,7 +53,6 @@ const Toolbar = ({
           setMaxPrice={setMaxPrice}
         />
       </div>
-
       {/* Sorting */}
       <SortingProperty sort={sort} setSort={setSort} />
     </div>

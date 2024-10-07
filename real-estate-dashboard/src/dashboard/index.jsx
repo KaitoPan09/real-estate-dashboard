@@ -15,7 +15,7 @@ const getLocationValue = (location) => {
 };
 
 export default function Dashboard() {
-  const [sort, setSort] = useState("ascending");
+  const [sort, setSort] = useState("descending");
   const [propertyType, setPropertyType] = useState("all");
   const [searchName, setSearchName] = useState("");
   const [selectedLocations, setSelectedLocations] = useState([]);
@@ -26,8 +26,8 @@ export default function Dashboard() {
     // Sort the properties based on propert name
     .sort((a, b) =>
       sort === "ascending"
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name)
+        ? a.stars - b.stars
+        : b.stars - a.stars
     )
     // Filter by occupancy status
     .filter((properties) =>
@@ -57,7 +57,7 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      {/* ===== Top Heading ===== */}
+      {/* Top Heading */}
       <Layout.Header sticky>
         <div className="ml-auto flex items-center space-x-4">
           <div className="flex items-center space-x-4">
@@ -67,7 +67,7 @@ export default function Dashboard() {
         </div>
       </Layout.Header>
 
-      {/* ===== Content ===== */}
+      {/* Content */}
       <Layout.Body className="flex flex-col">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">

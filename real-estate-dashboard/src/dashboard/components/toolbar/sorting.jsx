@@ -1,7 +1,7 @@
 import {
   IconAdjustmentsHorizontal,
-  IconSortAscendingLetters,
-  IconSortDescendingLetters,
+  IconSortAscending,
+  IconSortDescending,
 } from "@tabler/icons-react";
 import {
   Select,
@@ -23,14 +23,14 @@ const SortingProperty = ({ sort, setSort }) => {
       <SelectContent align="end">
         <SelectItem value="ascending">
           <div className="flex items-center gap-4">
-            <IconSortAscendingLetters size={16} />
-            <span>Ascending</span>
+            <IconSortAscending size={16} />
+            <span>Stars: Low to High</span>
           </div>
         </SelectItem>
         <SelectItem value="descending">
           <div className="flex items-center gap-4">
-            <IconSortDescendingLetters size={16} />
-            <span>Descending</span>
+            <IconSortDescending size={16} />
+            <span>Stars: High to Low</span>
           </div>
         </SelectItem>
       </SelectContent>

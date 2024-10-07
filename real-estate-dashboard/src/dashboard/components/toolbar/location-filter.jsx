@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 
 const getLocationValue = (location) => {
   const parts = location.split(",").map((part) => part.trim());
-  return parts.slice(-2).join(", ");
+  return parts.slice(1).join(", ");
 };
 
 // Passes Location filter props to Toolbar component 
