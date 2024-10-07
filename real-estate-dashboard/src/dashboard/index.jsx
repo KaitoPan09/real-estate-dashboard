@@ -8,11 +8,8 @@ import Toolbar from "./components/toolbar/toolbar";
 import PropertyList from "./components/property-lists";
 import { getLocationValue } from "@/lib/utils";
 
-// Function to format of the location filter
-// Splits and keeps the last 2 commas from the JSON (city, state)
-
 export default function Dashboard() {
-  const [sort, setSort] = useState("descending");
+  const [sortRating, setSortRating] = useState("descending");
   const [propertyType, setPropertyType] = useState("all");
   const [searchName, setSearchName] = useState("");
   const [selectedLocations, setSelectedLocations] = useState([]);
@@ -20,11 +17,9 @@ export default function Dashboard() {
   const [maxPrice, setMaxPrice] = useState("");
 
   const filteredProperties = properties
-    // Sort the properties based on propert name
+    // Sort the properties based on propert ratings
     .sort((a, b) =>
-      sort === "ascending"
-        ? a.stars - b.stars
-        : b.stars - a.stars
+      sortRating === "ascending" ? a.stars - b.stars : b.stars - a.stars
     )
     // Filter by occupancy status
     .filter((properties) =>
@@ -35,10 +30,11 @@ export default function Dashboard() {
         : true
     )
     // Filter based on property location
-    .filter((property) =>
-      selectedLocations.length === 0 // If no location is selected, show all properties
-        ? true
-        : selectedLocations.includes(getLocationValue(property.location)) // Match selected locations
+    .filter(
+      (property) =>
+        selectedLocations.length === 0 // If no location is selected, show all properties
+          ? true
+          : selectedLocations.includes(getLocationValue(property.location)) // Match selected locations
     )
     // Filter by name search (case-insensitive)
     .filter((properties) =>
@@ -54,7 +50,7 @@ export default function Dashboard() {
 
   return (
     <Layout>
-      {/* Top Heading */}
+      {/* ===== Top Heading ===== */}
       <Layout.Header sticky>
         <div className="ml-auto flex items-center space-x-4">
           <div className="flex items-center space-x-4">
@@ -64,11 +60,11 @@ export default function Dashboard() {
         </div>
       </Layout.Header>
 
-      {/* Content */}
+      {/* ===== Content ===== */}
       <Layout.Body className="flex flex-col">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
-            Property Listing in XYZ Country
+            Property Listing in XYZ County
           </h1>
           <p className="text-muted-foreground">Properties for Sale in XYZ</p>
         </div>
@@ -85,8 +81,8 @@ export default function Dashboard() {
           setMinPrice={setMinPrice}
           maxPrice={maxPrice}
           setMaxPrice={setMaxPrice}
-          sort={sort}
-          setSort={setSort}
+          sortRating={sortRating}
+          setSortRating={setSortRating}
           properties={properties}
         />
 

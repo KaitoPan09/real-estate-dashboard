@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import AvailabilityFilter from "./availability-filter";
 import LocationFilter from "./location-filter";
 import PriceFilter from "./price-filter";
-import SortingProperty from "./sorting";
+import SortingRating from "./sort-rating";
 
 // Passing toolbar props for filtering and sorting
 // Passes props to Dashboard index
@@ -17,8 +17,8 @@ const Toolbar = ({
   setMinPrice,
   maxPrice,
   setMaxPrice,
-  sort,
-  setSort,
+  sortRating,
+  setSortRating,
   properties,
 }) => {
   return (
@@ -54,7 +54,7 @@ const Toolbar = ({
         />
       </div>
       {/* Sorting */}
-      <SortingProperty sort={sort} setSort={setSort} />
+      <SortingRating sortRating={sortRating} setSortRating={setSortRating} />
     </div>
   );
 };

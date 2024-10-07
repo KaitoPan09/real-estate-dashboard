@@ -11,26 +11,30 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-// Passes Sorting props to Toolbar component 
-const SortingProperty = ({ sort, setSort }) => {
+// Passes Sorting props to Toolbar component
+const SortingRating = ({ sortRating, setSortRating }) => {
   return (
-    <Select value={sort} onValueChange={setSort}>
-      <SelectTrigger className="w-16">
+    <Select value={sortRating} onValueChange={setSortRating}>
+      <SelectTrigger className="w-32">
         <SelectValue>
-          <IconAdjustmentsHorizontal size={18} />
+          {sortRating === "ascending" ? (
+            <span className="font-bold text-yellow-500">★</span>
+          ) : (
+            <span className="font-bold text-yellow-500">★★★★★</span>
+          )}
         </SelectValue>
       </SelectTrigger>
       <SelectContent align="end">
         <SelectItem value="ascending">
           <div className="flex items-center gap-4">
             <IconSortAscending size={16} />
-            <span>Stars: Low to High</span>
+            <span>★ Low to High</span>
           </div>
         </SelectItem>
         <SelectItem value="descending">
           <div className="flex items-center gap-4">
             <IconSortDescending size={16} />
-            <span>Stars: High to Low</span>
+            <span>★ High to Low</span>
           </div>
         </SelectItem>
       </SelectContent>
@@ -38,4 +42,4 @@ const SortingProperty = ({ sort, setSort }) => {
   );
 };
 
-export default SortingProperty;
+export default SortingRating;
