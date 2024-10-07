@@ -6,13 +6,10 @@ import { UserNav } from "@/components/user-nav";
 import { properties } from "./data";
 import Toolbar from "./components/toolbar/toolbar";
 import PropertyList from "./components/property-lists";
+import { getLocationValue } from "@/lib/utils";
 
 // Function to format of the location filter
 // Splits and keeps the last 2 commas from the JSON (city, state)
-const getLocationValue = (location) => {
-  const parts = location.split(",").map((part) => part.trim());
-  return parts.slice(-2).join(", ");
-};
 
 export default function Dashboard() {
   const [sort, setSort] = useState("descending");

@@ -15,12 +15,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { CheckIcon } from "@radix-ui/react-icons";
-import { cn } from "@/lib/utils";
-
-const getLocationValue = (location) => {
-  const parts = location.split(",").map((part) => part.trim());
-  return parts.slice(1).join(", ");
-};
+import { cn, getLocationValue } from "@/lib/utils";
 
 // Passes Location filter props to Toolbar component 
 const LocationFilter = ({
