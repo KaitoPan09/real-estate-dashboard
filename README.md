@@ -23,7 +23,7 @@ Start the server
 
 ## Author
 
-Submitted by [Christopher Jon Gaw Put](https://github.com/KaitoPan09)
+Submitted by [Gaw Put](https://github.com/KaitoPan09)
 
 ## Submission Date
 
